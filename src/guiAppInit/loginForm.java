@@ -1,4 +1,4 @@
-package myapp;
+package guiAppInit;
 
 
 import java.awt.BasicStroke;
