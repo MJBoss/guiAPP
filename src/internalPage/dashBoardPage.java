@@ -62,7 +62,7 @@ public class dashBoardPage extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(140, 104, 141));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(510, 0, 170, 170);
+        jPanel3.setBounds(510, 0, 170, 220);
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("SYSTEM TITLE HERE V1.1");
@@ -74,7 +74,7 @@ public class dashBoardPage extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 60, 270, 20);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 170));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 190));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
         jPanel2.setLayout(null);
@@ -151,7 +151,7 @@ public class dashBoardPage extends javax.swing.JInternalFrame {
         jPanel2.add(settings);
         settings.setBounds(510, 40, 170, 160);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 169, 760, 250));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 189, 760, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
