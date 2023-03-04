@@ -4,6 +4,7 @@ package guiAppInit;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -225,7 +226,11 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-       System.exit(0);
+         int a=JOptionPane.showConfirmDialog(null,"Confirm Exit?");  
+        if(a==JOptionPane.YES_OPTION){  
+             System.exit(0);
+}  
+
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked

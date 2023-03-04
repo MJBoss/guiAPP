@@ -189,7 +189,7 @@ public class settingsPage extends javax.swing.JInternalFrame {
         jPanel2.add(logout);
         logout.setBounds(510, 40, 170, 160);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 189, 760, 230));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 189, 760, 250));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
