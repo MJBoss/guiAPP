@@ -6,14 +6,15 @@
 package internalPage;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import config.DBConnector;
-import config.connection;
-import java.sql.Connection;
+import config.dbsconnector;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
+
+
 
 /**
  *
@@ -24,27 +25,78 @@ public class userPage extends javax.swing.JInternalFrame {
     /**
      * Creates new form userPage
      */
-    public userPage() {
+    public userPage(){
         initComponents();
-        
-     
-      try {
-            populateTable();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        
-              this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
+
+        this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
+    }
+    
+    
+    public void getData(){
         
+        try{
+            dbsconnector dbc = new dbsconnector(); 
+            ResultSet rs = dbc.getData("SELECT * FROM tbl_student");
+            student_table.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(SQLException ex){
+        
+        }
         
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void reset(){
+            sid.setText("");
+                    sname.setText("");
+                    sadd.setText("");
+                    sstat.setText("");
+                    sgend.setText("");
+    }
+    
+    public void displayData(){
+        
+        try{
+        
+            DBConnector dbc = new DBConnector();
+            ResultSet rs = dbc.getData("SELECT * FROM tbl_student");
+            student_table.setModel(DbUtils.resultSetToTableModel(rs));
+        
+        }catch(SQLException ex){
+            System.out.println("Error Message: "+ex);
+        
+        }
+    }
+    
+    
+    public void fillTable(){
+        
+        try{
+        DBConnector dbc = new DBConnector();
+        ResultSet rs = dbc.getData("SELECT * FROM tbl_student");
+        student_table.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch(Exception e){
+            System.out.println(""+e);
+        }
+        }
+    
+    
+    
+    
+    
     private void populateTable() throws SQLException {
     DBConnector db = new DBConnector();
-    ResultSet rs = db.getData("SELECT s_id, s_name FROM tbl_students");
-    table.setModel(DbUtils.resultSetToTableModel(rs));
+    ResultSet rs = db.getData("SELECT st_id, st_name FROM tbl_student");
+    student_table.setModel(DbUtils.resultSetToTableModel(rs));
 }
 
     /**
@@ -58,9 +110,18 @@ public class userPage extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-        id = new javax.swing.JTextField();
+        sgend = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        sid = new javax.swing.JTextField();
+        sname = new javax.swing.JTextField();
+        sadd = new javax.swing.JTextField();
+        sstat = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        student_table = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,51 +129,165 @@ public class userPage extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel1.setText("THIS IS USER PAGE");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 330, 70));
+        jPanel1.add(sgend, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 30));
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][][] {
-            },
-            new String [] {
-                "Student ID", "Name", "Status"
-            }
-        ));
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
+        jButton1.setText("DISPLAY");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(table);
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 80, 30));
+        jPanel1.add(sid, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 190, 30));
+        jPanel1.add(sname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 190, 30));
+        jPanel1.add(sadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, 30));
+        jPanel1.add(sstat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 190, 30));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 500, 240));
-        jPanel1.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 210, 40));
+        jButton2.setText("SAVE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 80, 30));
+
+        jButton3.setText("DELETE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 80, 30));
+
+        student_table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                student_tableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(student_table);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 490, 280));
+
+        jButton4.setText("CLEAR");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 70, 30));
+
+        jButton5.setText("UPDATE");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        int row = table.getSelectedRow();
-        int col = table.getSelectedColumn();
-        Object value = table.getValueAt(row, col);
-        id.setText(value.toString());
-    }//GEN-LAST:event_tableMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        getData();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         
+ 
+DBConnector dbc = new DBConnector();
+
+        dbc.insertData("INSERT INTO tbl_student (st_name, st_address, st_status, st_gender) "
+
+                + "VALUES ('"+sname.getText()+"', '"+sadd.getText()+"','"+sstat.getText()+"','"+sgend.getText()+"')");
+
+        displayData();
+        reset();
+ 
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       int rowIndex = student_table.getSelectedRow();
+       if(rowIndex < 0){
+           JOptionPane.showMessageDialog(null, "Please select a data first");
+       }else{
+            TableModel model = student_table.getModel();
+            Object value = model.getValueAt(rowIndex, 0);
+            String id = value.toString();
+             int a=JOptionPane.showConfirmDialog(null,"Are you sure?");  
+                    if(a==JOptionPane.YES_OPTION){  
+                            DBConnector dbc = new DBConnector();
+                            dbc.deleteData(Integer.parseInt(id));
+                            displayData(); 
+                            reset();
+                    }     
+       }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void student_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_student_tableMouseClicked
+          int rowIndex = student_table.getSelectedRow();
+          if(rowIndex < 0){
+           
+         }else{
+               TableModel model = student_table.getModel();
+                    sid.setText(""+model.getValueAt(rowIndex, 0));
+                    sname.setText(""+model.getValueAt(rowIndex, 1));
+                    sadd.setText(""+model.getValueAt(rowIndex, 2));
+                    sstat.setText(""+model.getValueAt(rowIndex, 3));
+                    sgend.setText(""+model.getValueAt(rowIndex, 4));
+                    
+          }
+    }//GEN-LAST:event_student_tableMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        reset();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        DBConnector dbc = new DBConnector();
+        int num = dbc.updateData("UPDATE tbl_student "
+                + "SET st_name = '"+sname.getText()+"', st_address='"+sadd.getText()+"', "
+                        + "st_status ='"+sstat.getText()+"', st_gender='"+sgend.getText()+"'  "
+                                + "WHERE st_id = '"+sid.getText()+"'");
+        
+        if(num == 0){
+            
+        }else{
+           JOptionPane.showMessageDialog(null, "Updated Successfully!");
+           displayData();
+           reset();
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField id;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField sadd;
+    private javax.swing.JTextField sgend;
+    private javax.swing.JTextField sid;
+    private javax.swing.JTextField sname;
+    private javax.swing.JTextField sstat;
+    private javax.swing.JTable student_table;
     // End of variables declaration//GEN-END:variables
 }

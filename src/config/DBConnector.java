@@ -15,9 +15,9 @@ public class DBConnector {
     
     private Connection connection;
     
-    public DBConnector() throws SQLException {
+    public DBConnector(){
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_school", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/scc_db", "root", "");
             }catch(SQLException e){
                 System.err.println("Cannot connect to database: " + e.getMessage());
             }
@@ -32,34 +32,58 @@ public class DBConnector {
     }
     
     
-    public void updateRecord(int id, String name, String email) {
+    public void insertData(String sql){
+//    String sql = "INSERT INTO customers (name, email) VALUES ('John Smith', 'john@example.com')";
+            try{
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            
+            pstmt.executeUpdate();
+            System.out.println("Inserted Successfully!");
+            pstmt.close();
+            }catch(SQLException e){
+                System.out.println("Connection Error: "+e);
+            }
+    }
+    
+    
+    public void deleteData(int id) {
     try {
-        // Load the JDBC driver
-        Class.forName("com.mysql.jdbc.Driver");
-
-        // Establish a connection to the database
-        
-        // Create a prepared statement for the update query
-        String sql = "UPDATE mytable SET name = ?, email = ? WHERE id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        // Set the parameters for the prepared statement
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, email);
-        preparedStatement.setInt(3, id);
-
-        // Execute the update query
-        int rowsAffected = preparedStatement.executeUpdate();
-        System.out.println(rowsAffected + " rows updated.");
-
-        // Close the prepared statement and connection
-        preparedStatement.close();
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM tbl_student WHERE st_id = ?");
+        stmt.setInt(1, id);
+        int rowsDeleted = stmt.executeUpdate();
+        if (rowsDeleted > 0) {
+            System.out.println(rowsDeleted + " rows were deleted.");
+        } else {
+            System.out.println("No rows were deleted.");
+        }
+        stmt.close();
         connection.close();
-    } catch (ClassNotFoundException | SQLException e) {
-        e.printStackTrace();
+    } catch (SQLException e) {
+        System.out.println("Error deleting data: " + e.getMessage());
     }
 }
     
+    
+    public int updateData(String sql){
+        int num = 0;
+        try {
+       
+            String query = sql;
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            int rowsUpdated = pstmt.executeUpdate();
+            if(rowsUpdated > 0) {
+                System.out.println("Data updated successfully!");
+                num = 1;
+            } else {
+                System.out.println("Data update failed!");
+                num = 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return num;
+    }
     
     
 }
