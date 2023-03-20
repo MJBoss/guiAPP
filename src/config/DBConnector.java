@@ -20,20 +20,21 @@ public class DBConnector {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/scc_db", "root", "");
             }catch(SQLException e){
                 System.err.println("Cannot connect to database: " + e.getMessage());
-            }
+            }12
         
         
     }
     
+    
+    //for SELECT or DISPLAY data, must be inside the connector class
     public ResultSet getData(String sql) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
         return resultSet;
     }
     
-    
+       //for INSERT or CREATE data, must be inside the connector class
     public void insertData(String sql){
-//    String sql = "INSERT INTO customers (name, email) VALUES ('John Smith', 'john@example.com')";
             try{
             PreparedStatement pstmt = connection.prepareStatement(sql);
             
@@ -45,7 +46,7 @@ public class DBConnector {
             }
     }
     
-    
+      //for DELETE or REMOVE data, must be inside the connector class
     public void deleteData(int id) {
     try {
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM tbl_student WHERE st_id = ?");
@@ -63,7 +64,7 @@ public class DBConnector {
     }
 }
     
-    
+      //for UPDATE or CHANGE data, must be inside the connector class
     public int updateData(String sql){
         int num = 0;
         try {

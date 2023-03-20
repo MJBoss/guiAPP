@@ -27,34 +27,14 @@ public class userPage extends javax.swing.JInternalFrame {
      */
     public userPage(){
         initComponents();
-
+        displayData();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
     }
     
     
-    public void getData(){
-        
-        try{
-            dbsconnector dbc = new dbsconnector(); 
-            ResultSet rs = dbc.getData("SELECT * FROM tbl_student");
-            student_table.setModel(DbUtils.resultSetToTableModel(rs));
-        }catch(SQLException ex){
-        
-        }
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public void reset(){
             sid.setText("");
                     sname.setText("");
@@ -77,27 +57,7 @@ public class userPage extends javax.swing.JInternalFrame {
         }
     }
     
-    
-    public void fillTable(){
-        
-        try{
-        DBConnector dbc = new DBConnector();
-        ResultSet rs = dbc.getData("SELECT * FROM tbl_student");
-        student_table.setModel(DbUtils.resultSetToTableModel(rs));
-        }catch(Exception e){
-            System.out.println(""+e);
-        }
-        }
-    
-    
-    
-    
-    
-    private void populateTable() throws SQLException {
-    DBConnector db = new DBConnector();
-    ResultSet rs = db.getData("SELECT st_id, st_name FROM tbl_student");
-    student_table.setModel(DbUtils.resultSetToTableModel(rs));
-}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,20 +88,20 @@ public class userPage extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel1.setText("THIS IS USER PAGE");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 330, 70));
-        jPanel1.add(sgend, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 190, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 330, 70));
+        jPanel1.add(sgend, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 190, 30));
 
-        jButton1.setText("DISPLAY");
+        jButton1.setText("REFRESH");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 80, 30));
-        jPanel1.add(sid, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 190, 30));
-        jPanel1.add(sname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 190, 30));
-        jPanel1.add(sadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, 30));
-        jPanel1.add(sstat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 190, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 80, 30));
+        jPanel1.add(sid, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 190, 30));
+        jPanel1.add(sname, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 190, 30));
+        jPanel1.add(sadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 190, 30));
+        jPanel1.add(sstat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 190, 30));
 
         jButton2.setText("SAVE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +109,7 @@ public class userPage extends javax.swing.JInternalFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 80, 30));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 80, 30));
 
         jButton3.setText("DELETE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +117,7 @@ public class userPage extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 80, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 80, 30));
 
         student_table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,7 +126,7 @@ public class userPage extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(student_table);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 490, 280));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 490, 280));
 
         jButton4.setText("CLEAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +134,7 @@ public class userPage extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 70, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 70, 30));
 
         jButton5.setText("UPDATE");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +142,7 @@ public class userPage extends javax.swing.JInternalFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 100, 30));
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,20 +159,15 @@ public class userPage extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        getData();
-
+        displayData();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          
  
 DBConnector dbc = new DBConnector();
-
         dbc.insertData("INSERT INTO tbl_student (st_name, st_address, st_status, st_gender) "
-
                 + "VALUES ('"+sname.getText()+"', '"+sadd.getText()+"','"+sstat.getText()+"','"+sgend.getText()+"')");
-
         displayData();
         reset();
  
