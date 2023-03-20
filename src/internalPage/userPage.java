@@ -32,16 +32,16 @@ public class userPage extends javax.swing.JInternalFrame {
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
     }
-    
-    
-
+   
     public void reset(){
-            sid.setText("");
-                    sname.setText("");
-                    sadd.setText("");
-                    sstat.setText("");
-                    sgend.setText("");
+        sid.setText("");
+        sname.setText("");
+        sadd.setText("");
+        sstat.setText("");
+        sgend.setText("");
     }
+    
+    
     
     public void displayData(){
         
@@ -198,11 +198,11 @@ DBConnector dbc = new DBConnector();
            
          }else{
                TableModel model = student_table.getModel();
-                    sid.setText(""+model.getValueAt(rowIndex, 0));
-                    sname.setText(""+model.getValueAt(rowIndex, 1));
-                    sadd.setText(""+model.getValueAt(rowIndex, 2));
-                    sstat.setText(""+model.getValueAt(rowIndex, 3));
-                    sgend.setText(""+model.getValueAt(rowIndex, 4));
+                sid.setText(""+model.getValueAt(rowIndex, 0));
+                sname.setText(""+model.getValueAt(rowIndex, 1));
+                sadd.setText(""+model.getValueAt(rowIndex, 2));
+                sstat.setText(""+model.getValueAt(rowIndex, 3));
+                sgend.setText(""+model.getValueAt(rowIndex, 4));
                     
           }
     }//GEN-LAST:event_student_tableMouseClicked

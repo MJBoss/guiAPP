@@ -20,7 +20,7 @@ public class DBConnector {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/scc_db", "root", "");
             }catch(SQLException e){
                 System.err.println("Cannot connect to database: " + e.getMessage());
-            }12
+            }
         
         
     }
